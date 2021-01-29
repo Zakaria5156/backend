@@ -20,8 +20,13 @@ MongoClient.connect(uri, {
 
         //Defining Base route
         app.get('/', (req, res) => {
-            res.json({
-                'success': true,
+            const cursor = lessonsCollection.find().toArray()
+            .then(lessons => {
+                //return the lessons data as response
+                res.json({
+                    'success': true,
+                    'data': lessons
+                })
             })
         });
 
