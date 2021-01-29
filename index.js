@@ -34,7 +34,7 @@ MongoClient.connect(uri, {
                 })
         });
 
-        app.listen(8000, () => {
+        app.listen(process.env.PORT, () => {
             console.log('Example app listening on port 8000!')
         });
 
