@@ -6,7 +6,7 @@ app.use(bodyParser.json());
 
 const MongoClient = require('mongodb').MongoClient;
 //Connection string from mongodb
-const uri = "mongodb+srv://coursework:Coursework2@cluster0.vaitt.mongodb.net/test?retryWrites=true&w=majority";
+const uri = "mongodb+srv://coursework2:Coursework2@cluster0.fgnyf.mongodb.net/test??retryWrites=true&w=majority";
 
 //connecting to MongoDB Atlas using Node JS driver
 MongoClient.connect(uri, {
