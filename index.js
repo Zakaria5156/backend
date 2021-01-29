@@ -15,6 +15,15 @@ MongoClient.connect(uri, {
         const lessonsCollection = db.collection('lessons')
 
         //Defining the route to retreive the lessons from the collection
+        app.get('/', (req, res) => {
+            const cursor = lessonsCollection.find().toArray()
+                .then(lessons => {
+                    res.json({
+                        'success': true,
+                        'data': lessons
+                    })
+                })
+        });
         app.get('/lessons', (req, res) => {
             const cursor = lessonsCollection.find().toArray()
                 .then(lessons => {
