@@ -21,13 +21,13 @@ MongoClient.connect(uri, {
         //Defining Base route
         app.get('/', (req, res) => {
             const cursor = lessonsCollection.find().toArray()
-            .then(lessons => {
-                //return the lessons data as response
-                res.json({
-                    'success': true,
-                    'data': lessons
+                .then(lessons => {
+                    //return the lessons data as response
+                    res.json({
+                        'success': true,
+                        'data': lessons
+                    })
                 })
-            })
         });
 
         //Defining the route to retreive the lessons from the collection
@@ -51,8 +51,22 @@ MongoClient.connect(uri, {
             });
         });
 
+        //Update a lesson's space when added to cart or removed
+        app.put("/update-lesson",(req,res)=>{
+            lessonsCollection.updateOne(
+                { "id" : req.body.id }, 
+                { $set: {"spaces" : req.body.spaces } },
+                { upsert: true }
+            ).then(data =>{
+                res.json({
+                    'success': true
+                });
+            })
+        });
+        
+
         //Start the server
-        app.listen( process.env.PORT || 8000, () => {
+        app.listen(process.env.PORT || 8000, () => {
             console.log('Example app listening on port ' + process.env.PORT)
         });
 
